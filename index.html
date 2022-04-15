@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>스타크래프트</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .background {
+            position: relative;
+            background-image: url('images/background.avif');
+            background-size: cover;
+            border-radius: 15px;
+            width: 600px;
+            height: 430px;
+        }
+        #raccoon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 150px;
+            left: 60px;
+            animation: raccoon 0.5s ease-in-out alternate infinite;
+        }
+        #javascript {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 150px;
+            right: 20px;
+        }
+        #bullet {
+            display: none;
+            position: absolute;
+            top: 200px;
+            left: 150px;
+            width: 50px;
+            height: 30px;
+            z-index: 2;
+        }
+        #clear {
+            font-size: 25px;
+            font-weight: 700;
+            color: white;
+            position: absolute;
+            top: 180px;
+            right: 10px;
+            display: none;
+            animation: clear 1s alternate infinite;
+        }
+
+        /* animation */
+
+        @keyframes raccoon {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes clear {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id='hp'>HP: 5</h1>
+    <div class='background'>
+        <img id='raccoon' src="images/savage_raccoon.png" alt="raccoon">
+        <img id='bullet' src="images/bullet.png" alt="bullet">
+        <img id='javascript' src="images/javascript.png" alt="javascript">
+        <p id="clear">JS 완전 정복 😘</p>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script>
+        var hp = 5;
+        $('#raccoon').click(function() {
+            $('#bullet').fadeIn();
+            $('#bullet').animate({'left': '+=300px'});
+            $('#bullet').fadeOut(function(){
+                if (hp > 0){
+                    hp = hp - 1;
+                    $('#hp').text('HP: ' + hp);
+                    if (hp == 0) {
+                        $('#javascript').fadeOut();
+                        $('#clear').fadeIn();
+                    }
+                }
+            });
+            $('#bullet').css({left: 150});
+        });
+    </script>
+</body>
+</html>
